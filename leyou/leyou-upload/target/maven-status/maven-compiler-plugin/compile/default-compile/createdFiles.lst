@@ -1,6 +1,0 @@
-com\leyou\upload\config\FastClientImporter.class
-com\leyou\upload\service\IUploadService.class
-com\leyou\upload\config\LeyouCorsConfiguration.class
-com\leyou\LeyouUploadApplication.class
-com\leyou\upload\controller\Uploadcontroller.class
-com\leyou\upload\service\impl\UploadServiceImpl.class
