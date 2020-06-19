@@ -760,8 +760,32 @@
     var vm = new Vue({
         el: "#searchApp",
         data: {
+            search:{
+                key:""
+            },
+            goodsList:[]
         },
+        created(){
+            if(!location.search){
+                return;
+            }
+            //获取请求路径
+            const search = ly.parse(location.search.substring(1));
+            //将请求路径赋予search数据模型
+            this.search = search ;
+            //发送异步请求
+            this.loadData();
+        },
+        methods:{
+            loadData(){
+                console.log("哈哈哈哈哈哈哈")
+                ly.http.post("/search/page",this.search).then(res => {
+                    console.log(res);
+                }).catch(() => {
 
+                });
+            },
+        },
         components:{
             lyTop: () => import("./js/pages/top.js")
         }
