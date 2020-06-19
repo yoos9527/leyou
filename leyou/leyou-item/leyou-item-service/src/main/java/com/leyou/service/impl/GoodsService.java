@@ -4,13 +4,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.leyou.common.pojo.PageResult;
 import com.leyou.item.bo.SpuBo;
+import com.leyou.item.pojo.Sku;
 import com.leyou.item.pojo.Spu;
 import com.leyou.item.pojo.SpuDetail;
 import com.leyou.item.pojo.Stock;
-import com.leyou.mapper.BrandMapper;
-import com.leyou.mapper.SkuMapper;
-import com.leyou.mapper.SpuMapper;
-import com.leyou.mapper.StockMapper;
+import com.leyou.mapper.*;
 import com.leyou.service.ICategoryService;
 import com.leyou.service.IGoodsService;
 import org.apache.commons.lang.StringUtils;
@@ -37,6 +35,8 @@ public class GoodsService implements IGoodsService {
     private SkuMapper skuMapper;
     @Autowired
     StockMapper stockMapper;
+    @Autowired
+    private SpuDetailMapper spuDetailMapper;
     @Override
     public PageResult<SpuBo> querySpuBoByPage(String key, Boolean saleable, Integer page, Integer rows) {
         //搜索条件
@@ -87,6 +87,20 @@ public class GoodsService implements IGoodsService {
         spuDetail.setSpuId(spuBo.getId());
         saveSkuAndStock(spuBo);
     }
+
+    @Override
+    public List<Sku> querySkuBySpuId(Long spuId) {
+        Sku recode = new Sku();
+        recode.setSpuId(spuId);
+        return this.skuMapper.select(recode);
+    }
+
+    @Override
+    public SpuDetail querySpuDetailBySpuId(Long id) {
+        return this.spuDetailMapper.selectByPrimaryKey(id);
+    }
+
+
     private void saveSkuAndStock(SpuBo spuBo){
         spuBo.getSkus().forEach(sku -> {
             //新增sku

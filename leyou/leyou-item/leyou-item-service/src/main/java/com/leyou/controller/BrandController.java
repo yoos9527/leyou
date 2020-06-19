@@ -3,7 +3,6 @@ package com.leyou.controller;
 import com.leyou.common.pojo.PageResult;
 import com.leyou.item.pojo.Brand;
 import com.leyou.service.IBrandService;
-import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @Controller
 @RequestMapping("brand")
 public class BrandController {
@@ -62,5 +60,16 @@ public class BrandController {
         System.out.println(cids.toString());
         this.brandService.saveBrand(brand,cids);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    /**
+     * 根据id查询品牌信息
+     */
+    @GetMapping("{id}")
+    public ResponseEntity<Brand> queryBrandById(@PathVariable("id")Long id){
+        Brand brand = this.brandService.queryBrandById(id);
+        if(brand == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(brand);
     }
 }
