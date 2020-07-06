@@ -60,4 +60,13 @@ public class SearchResult extends PageResult<Goods> {
     public void setBrands(List<Brand> brands) {
         this.brands = brands;
     }
+
+    @Override
+    public String toString() {
+        return "SearchResult{" +
+                "category=" + category +
+                ", brands=" + brands +
+                ", spec=" + spec +
+                '}';
+    }
 }

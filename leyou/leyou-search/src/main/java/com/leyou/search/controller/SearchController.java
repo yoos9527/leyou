@@ -23,7 +23,9 @@ public class SearchController {
 
     @PostMapping("page")
     public ResponseEntity<SearchResult> search(@RequestBody SearchRequest request){
+        System.out.println("请求参数为="+request.getKey()+"&"+request.getPage());
         SearchResult searchResult = this.searchService.search(request);
+        System.out.println("返回的参数为="+searchResult.toString());
         if(searchResult == null || CollectionUtils.isEmpty(searchResult.getItems())){
             return ResponseEntity.notFound().build();
         }

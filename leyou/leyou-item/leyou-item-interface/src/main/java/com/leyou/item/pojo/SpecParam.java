@@ -88,4 +88,19 @@ public class SpecParam {
     public void setSegments(String segments) {
         this.segments = segments;
     }
+
+    @Override
+    public String toString() {
+        return "SpecParam{" +
+                "id=" + id +
+                ", cid=" + cid +
+                ", groupId=" + groupId +
+                ", name='" + name + '\'' +
+                ", numeric=" + numeric +
+                ", unit='" + unit + '\'' +
+                ", generic=" + generic +
+                ", searching=" + searching +
+                ", segments='" + segments + '\'' +
+                '}';
+    }
 }
